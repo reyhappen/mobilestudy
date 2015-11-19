@@ -90,7 +90,7 @@
 
 html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;font-size:10px;}
 html, body{width:100%;height:100%;overflow:hidden;}
-body{font-family:"Helvetica Neue", Helvetica, STHeiTi, sans-serif;word-wrap:break-word;word-break:break-all;color:#333;line-height:1;-webkit-font-smoothing:antialiased;}
+body{font-family:"San Francisco","Heiti SC",Rotobo,"Droid Sans","Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;word-wrap:break-word;word-break:break-all;color:#333;line-height:1;-webkit-font-smoothing:antialiased;}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{-webkit-tap-highlight-color:rgba(0,0,0,0);margin:0;padding:0;-webkit-text-size-adjust:none;-webkit-box-sizing:border-box;box-sizing:border-box;-webkit-overflow-scrolling:touch;}
 a{text-decoration:none;}
 button,input,select,textarea{font-family:inherit;font-size:inherit;font-weight:inherit;outline:0;}
@@ -104,20 +104,23 @@ script,link,[hidden]{display:none!important;}
 [invisible]{visibility:hidden!important;}
 /*!important > style > id > class > attribute > persuade > tag*/
 
+/*浮动与其清除*/
 .fl{float:left;}
 .fr{float:right;}
 .clear:after{visibility:hidden;display:block;content:"";clear:both;height:0;}
 .ell, .mlineell{overflow:hidden;text-overflow:ellipsis;}
 .ell,.nobr{white-space:nowrap;word-wrap:normal;word-break:keep-all;}
+.ovh{overflow:hidden;}
 
 /*旋转*/
 .rotate90{-webkit-transform:rotate(90deg);transform:rotate(90deg);}
 .rotate180{-webkit-transform:rotate(180deg);transform:rotate(180deg);}
 .rotate270{-webkit-transform:rotate(270deg);transform:rotate(270deg);}
 
-.mlineell{display:-webkit-box;-webkit-box-orient:vertical;white-space:normal;word-wrap:break-word;word-break:break-all;}
+/*多行省略号必加*/
+.mlineell{-webkit-box-orient:vertical;-ms-box-orient:vertical;-moz-box-orient:vertical;box-orient:vertical;white-space:normal;word-wrap:break-word;word-break:break-all;}
 /*两行省略号*/
-.twolineell{-webkit-line-clamp:2;}
+.twolineell{-webkit-line-clamp:2;line-clamp:2;}
 /*示例*/
 .textcolumns3{
 	width:100%;
@@ -145,6 +148,50 @@ http://www.zhangxinxu.com/wordpress/2010/12/css-box-flex%E5%B1%9E%E6%80%A7%EF%BC
 .vabscenter, .absmiddle{position:absolute;top:50%;}
 .absmiddle, .hvmiddle{-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);}
 
+.invisible{visibility:hidden;}
+.hide{display:none;}
+.separater{height:1.5rem;}
+
+.halfwidth{width:50%;}
+
+/*内边距*/
+.pdt05{padding-top:.5rem;}
+.pdl15{padding-left:1.5rem!important;}
+.pdr15{padding-right:1.5rem!important;}
+.pdt15{padding-top:1.5rem!important;}
+.pdb15{padding-bottom:1.5rem!important;}
+.nopd{padding:0!important;}
+
+/*上下边框*/
+.bt1{border-top:.1rem solid #d8d9da;}
+.bb1{border-bottom:.1rem solid #d8d9da;}
+
+/*文本颜色*/
+.text_red{color:#ff6363!important;}
+.text_blue{color:#4aacea!important;}
+.text_green{color:#4fb533!important;}
+.text_brown{color:#f5a623!important;}
+.text_gray{color:#999!important;}
+
+/*背景色*/
+.bg_blue{background-color:#4aacea;}
+.bg_orange{background-color:#f5a623;}
+.bg_green{background-color:#77c12e;}
+
+/*文本不加粗*/
+.nobold{font-weight:normal!important;}
+
+/*文本对齐*/
+.tl{text-align:left;}
+.tc{text-align:center;}
+.tr{text-align:right;}
+
+/*flex布局*/
+.flex, .mlineell{display:-webkit-box;display:-ms-flexbox;display:-moz-box;display:box;display:-webkit-flex;display:flex;}
+.flexitem{flex:1;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;width:100%;}
+
+
+
 .btn{display:inline-block;height:3.2rem;}
 .btn:active{-webkit-tap-highlight-color:rgba(0,0,0,.3);}
 
@@ -158,7 +205,7 @@ http://www.zhangxinxu.com/wordpress/2010/12/css-box-flex%E5%B1%9E%E6%80%A7%EF%BC
 .headerright dd a+a{border-top:0;}
 
 .footer{position:absolute;bottom:0;width:100%;display:-webkit-box;display:-ms-flexbox;display:-moz-box;display:box;display:-webkit-flex;display:flex;background:#fff;}
-.footer a{display:block;flex:1;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;overflow:hidden;text-align:center;color:#999;font-size:1.4rem;border:.1rem solid #ccc;border-width:.1rem .1rem 0 0;}
+.footer a{display:block;flex:1;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;width:100%;overflow:hidden;text-align:center;color:#999;font-size:1.4rem;border:.1rem solid #ccc;border-width:.1rem .1rem 0 0;}
 .footer a.active{color:#32a0f5;}
 .footer a i{display:inline-block;position:relative;font-size:3rem;}
 .footer a i em{position:absolute;top:0;right:-1rem;width:1.8rem;height:1.8rem;line-height:1.8rem;text-align:center;white-space:nowrap;font-size:1rem;font-style:normal;border-radius:50%;background:#e84f3c;color:#fff;font-family:arial;}
