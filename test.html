@@ -1,0 +1,419 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+<link rel="apple-touch-icon-precomposed" size="" href="" />
+<link rel="apple-touch-startup-image" size="" href="" />
+<meta name="screen-orientation" content="portrait" />
+<meta name="x5-orientation" content="portrait" />
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui" />
+<meta name="handheldfriendly" content="true" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-title" content="桌面标题" />
+<meta name="author" content="" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<title>标题</title>
+<style type="text/css">
+script,link,[hidden]{display:none!important;}
+html{font-size:10px;}
+.loadingmask, .loading{position:absolute;left:0;top:0;width:100%;height:100%;z-index:0;}
+.loadingmask{overflow:hidden;color:#fff;line-height:1;-webkit-transition:all 2s ease;transition:all 2s ease;visibility:visible;opacity:1;}
+.loadingmask.invisible{visibility:hidden;opacity:0;}
+.loadingmask.invisible .loading span{-ms-animation:none;-webkit-animation:none;-moz-animation:none;animation:none;}
+.loading{left:50%;top:50%;width:19rem;height:19rem;-webkit-transform:translate3d(-50%,-50%,0) rotate(45deg);transform:translate3d(-50%,-50%,0) rotate(45deg);}
+.loading div{position:absolute;left:35%;top:35%;width:30%;height:30%;background:#000;z-index:0;border-radius:.5rem;-webkit-transform:scale(2);transform:scale(2);
+	-ms-animation: pulse 1.5s ease infinite;
+	-webkit-animation: pulse 1.5s ease infinite;
+	-moz-animation: pulse 1.5s ease infinite;
+	animation: pulse 1.5s ease infinite;}
+.loadingmask .loadstatetext{position:absolute;left:50%;top:50%;z-index:1;-webkit-transform:translate3d(-50%,-50%,0);transform:translate3d(-50%,-50%,0);}
+.loading span{position:absolute;display:block;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:.5rem;background:#000;}
+.loading span:before{display:block;padding:.5rem;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
+.loading span:nth-child(1){left:0;top:0;-webkit-transform:translate3d(0, 0, 0);transform:translate3d(0, 0, 0);}
+.loading span:nth-child(2){left:100%;top:0;-webkit-transform:translate3d(-100%, 0, 0);transform:translate3d(-100%, 0, 0);}
+.loading span:nth-child(3){left:100%;top:100%;-webkit-transform:translate3d(-100%, -100%, 0);transform:translate3d(-100%, -100%, 0);}
+.loading span:nth-child(4){left:0;top:100%;-webkit-transform:translate3d(0, -100%, 0);transform:translate3d(0, -100%, 0);}
+.loading span:nth-child(1):before{content:'正';}
+.loading span:nth-child(2):before{content:'在';}
+.loading span:nth-child(3):before{content:'加';}
+.loading span:nth-child(4):before{content:'载';}
+.loading span:nth-child(1){
+	-ms-animation: square-br 3s ease infinite;
+	-webkit-animation: square-br 3s ease infinite;
+	-moz-animation: square-br 3s ease infinite;
+	animation: square-br 3s ease infinite;
+	-ms-animation-delay:0;
+	-webkit-animation-delay:0;
+	-moz-animation-delay:0;
+	animation-delay:0;}
+.loading span:nth-child(2){
+	-ms-animation: square-lb 3s ease infinite;
+	-webkit-animation: square-lb 3s ease infinite;
+	-moz-animation: square-lb 3s ease infinite;
+	animation: square-lb 3s ease infinite;}
+.loading span:nth-child(3){
+	-ms-animation: square-tl 3s ease infinite;
+	-webkit-animation: square-tl 3s ease infinite;
+	-moz-animation: square-tl 3s ease infinite;
+	animation: square-tl 3s ease infinite;}
+.loading span:nth-child(4){
+	-ms-animation: square-rt 3s ease infinite;
+	-webkit-animation: square-rt 3s ease infinite;
+	-moz-animation: square-rt 3s ease infinite;
+	animation: square-rt 3s ease infinite;}
+.loading span:nth-child(2),.loading span:nth-child(3),.loading span:nth-child(4){
+	-ms-animation-delay:.2s;
+	-webkit-animation-delay:.2s;
+	-moz-animation-delay:.2s;
+	animation-delay:.2s;
+	
+}
+@-webkit-keyframes pulse{
+	0%{
+		-webkit-transform: scale(2);
+		transform: scale(2);
+	}
+	75% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+@keyframes pulse{
+	0%{
+		-webkit-transform: scale(2);
+		transform: scale(2);
+	}
+	75% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+@-webkit-keyframes square-br{
+	0% {
+		-webkit-transform:translate(0, 0);
+		left:0;top:0;
+	}
+	25% {
+		-webkit-transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+	50% {
+		-webkit-transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+	75% {
+		-webkit-transform:translate(-100%, 0);
+		left:100%;top:0;
+	}
+}
+@keyframes square-br{
+	0% {
+		transform:translate(0, 0);
+		left:0;top:0;
+	}
+	25% {
+		transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+	50% {
+		transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+	75% {
+		transform:translate(-100%, -100%);
+		left:100%;top:0;
+	}
+}
+@-webkit-keyframes square-lb{
+	0% {
+		-webkit-transform:translate(-100%, 0);
+		left:100%;top:0;
+	}
+	25% {
+		-webkit-transform:translate(0, 0);
+		left:0;top:0;
+	}
+	50% {
+		-webkit-transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+	75% {
+		-webkit-transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+}
+@keyframes square-lb{
+	0% {
+		transform:translate(-100%, 0);
+		left:100%;top:0;
+	}
+	25% {
+		transform:translate(0, 0);
+		left:0;top:0;
+	}
+	50% {
+		transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+	75% {
+		transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+}
+@-webkit-keyframes square-tl{
+	0% {
+		-webkit-transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+	25% {
+		-webkit-transform:translate(-100%, 0);
+		left:100%;top:0;
+	}
+	50% {
+		-webkit-transform:translate(0, 0);
+		left:0;top:0;
+	}
+	75% {
+		-webkit-transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+}
+@keyframes square-tl{
+	0% {
+		transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+	25% {
+		transform:translate(-100%, 0);
+		left:100%;top:0;
+	}
+	50% {
+		transform:translate(0, 0);
+		left:0;top:0;
+	}
+	75% {
+		transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+}
+@-webkit-keyframes square-rt{
+	0% {
+		-webkit-transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+	25% {
+		-webkit-transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+	50% {
+		-webkit-transform:translate(-100%, 0);
+		left:100%;top:0;
+		
+	}
+	75% {
+		-webkit-transform:translate(0, 0);
+		left:0;top:0;
+	}
+}
+@keyframes square-rt{
+	0% {
+		transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+	25% {
+		transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+	50% {
+		transform:translate(-100%, 0);
+		left:100%;top:0;
+		
+	}
+	75% {
+		transform:translate(0, 0);
+		left:0;top:0;
+	}
+}
+</style>
+<style data-uri="css/m.css" data-percentage="5"></style>
+<script id="J_preloadjs" data-uri="js/preloadjs.js" data-percentage="5"></script>
+<script data-uri="js/jquery.js" data-percentage="5"></script>
+</head>
+<body>
+内容
+
+
+<div id="J_loadingmask" class="loadingmask">
+	<div class="loading">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<div></div>
+	</div>
+	<div class="loadstatetext" id="J_loadgprogress">0%</div>
+</div>
+
+<script type="text/javascript">
+window.onerror = function(e){
+	console.log(e);
+	//alert('系统貌似发生错误！请联系管理员！');
+	/*var lstorage = window['localStorage'];
+	if(lstorage) lstorage.clear();
+	location.reload(1);*/
+};
+
+function scriptInitiate(){
+	console.log('资源加载完毕可以使用了！');
+	console.log([jQuery('body')[0].tagName, createjs.PreloadJS]);
+}
+
+var J_loadgprogress = document.querySelector('#J_loadgprogress'),
+	loadingClass = document.querySelector('#J_loadingmask').classList;
+loadingClass.remove('invisible');
+function updateLoadingState(percentage){
+	J_loadgprogress.innerHTML = parseInt(percentage*100) + '%';
+	if(percentage == 1){
+		loadingClass.add('invisible');
+	}
+}
+setTimeout(function(){
+	loadingClass.remove('invisible');
+}, 3000);
+
+/*资源加载并缓存*/
+(function(version, urlAttr, scriptInitiate, updateLoadingState, preloadSelector){
+	urlAttr = urlAttr || 'data-uri';
+	var versionSuffix = '?'+version,
+		srcs = [], lstorage = window['localStorage'],
+		sources = document.querySelectorAll('script[' +urlAttr+ '], style[' +urlAttr+ ']'),
+		sourcesLen = sources.length, srcLoadQ = Array(sourcesLen), sourceLoaded = 0,
+		J_preloadjs = document.querySelector(preloadSelector || '#J_preloadjs'),
+		preloadjsSrc = J_preloadjs.getAttribute(urlAttr);
+	//地址获取并判断是否支持localStorage，不支持则直接设置src,href
+	//lstorage = false;//测试localstorage
+	for(var i=0, il=sources.length; i<il; i++){
+		var el = sources[i], src = el.getAttribute(urlAttr);
+		srcs.push(src);
+		if(!lstorage){
+			if(el.tagName == 'SCRIPT'){
+				el.onload = function(){
+					singleFileLoad(this);
+				};
+				el.src = src + versionSuffix;
+			}else if(el.tagName == 'STYLE'){
+				var link = document.createElement('link');
+				link.rel = 'stylesheet';
+				document.getElementsByTagName('head')[0].appendChild(link);
+				link.onload = function(){
+					singleFileLoad(this);
+				};
+				link.href = src + versionSuffix;
+				//el.innerHTML = '@import url('+ src +')';
+			}
+		}
+	}
+	
+	var queue, needUpdate = false;
+	if(lstorage){
+		//版本检查
+		if(lstorage.getItem('version') != version){
+			needUpdate = true;
+			lstorage.clear();
+			lstorage.setItem('version', version);
+			for(var j=0; j<il; j++){
+				srcs[j] = srcs[j]  + versionSuffix;
+			}
+		}
+		//存在localStorage
+		if(lstorage.getItem(preloadjsSrc  + versionSuffix) != null){
+			for(i=0; i<il; i++){
+				var scriptSource = lstorage.getItem(srcs[i]  + versionSuffix), sourceItem = sources[i];
+				try{
+					scriptSource = JSON.parse(scriptSource);
+				}catch(e){ };
+				if(scriptSource != null){
+					//存在缓存则直接应用js或css
+					if(sourceItem.tagName == 'SCRIPT'){
+						sourceItem.text = scriptSource;
+					}else if(sourceItem.tagName == 'STYLE'){
+						if(sourceItem.styleSheet){
+							sourceItem.styleSheet.cssText = scriptSource;
+						}else{
+							sourceItem.innerHTML = scriptSource;
+						}
+					}
+				}else{
+					console.log('系统所需资源不完整，页面需刷新以重新加载资源！');
+					lstorage.clear();
+					location.reload(1);
+					//并不想TODO 单个加载出来再添加到页面得写独立ajax
+				}
+			}
+			
+			if(needUpdate){
+				cjsLoadFiles(srcs);
+			}
+			updateLoadingState(1);
+			scriptInitiate();
+		}else{
+			J_preloadjs.onload = function(){
+				cjsLoadFiles(srcs);
+				J_preloadjs.onload = null;
+			};
+			J_preloadjs.src = J_preloadjs.getAttribute(urlAttr) + versionSuffix;
+		}
+	}
+	
+	function singleFileLoad(el){
+		srcLoadQ.pop();
+		sourceLoaded = (sourcesLen - srcLoadQ.length) / sourcesLen;
+		updateLoadingState(sourceLoaded);
+		if(!srcLoadQ.length){
+			scriptInitiate();
+		}
+		el.onload = null;
+	}
+	
+	function cjsLoadFiles(srcs){
+		if(window.createjs){
+			queue = new createjs.LoadQueue();
+			queue.on("fileload", handleFileLoad);
+			queue.on("progress", handleOverallProgress);
+			queue.on("fileprogress", handleFileProgress);
+			queue.on("error", handleFileError);
+			queue.on("complete", handleComplete);
+			queue.loadManifest(srcs);
+		}else{
+			onerror();
+		}
+	}
+	
+	function handleFileLoad(e){
+		lstorage.setItem(e.item.src, JSON.stringify(e.rawResult));
+		//updateLoadingState(queue.progress);
+	}
+	function handleOverallProgress(e){
+		updateLoadingState(queue.progress);
+	}
+	function handleFileProgress(e){
+		updateLoadingState(queue.progress);
+	}
+	function handleFileError(e){
+		console.log(e);
+		onerror();
+	}
+	function handleComplete(e){
+		updateLoadingState(1);
+		scriptInitiate();
+	}
+})(20150804, 'data-uri', scriptInitiate, updateLoadingState, '#J_preloadjs');
+//version, urlAttr, scriptInitiate, updateLoadingState, preloadSelector
+</script>
+</body>
+</html>

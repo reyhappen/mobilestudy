@@ -1,0 +1,598 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui" />
+<link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
+<link rel="apple-touch-icon-precomposed" size="" href="" />
+<link rel="apple-touch-startup-image" size="" href="" />
+<meta name="screen-orientation" content="portrait" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="x5-orientation" content="portrait" />
+<meta name="handheldfriendly" content="true" />
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no,email=no,adress=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="apple-mobile-web-app-title" content="桌面标题" />
+<meta name="author" content="" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<title>加载、模板与移动端事件以及各种移动端布局实例</title>
+<style type="text/css">
+html{font-size:10px;}
+.loadingmask, .loading{position:absolute;left:0;top:0;width:100%;height:100%;z-index:0;}
+.loadingmask{overflow:hidden;color:#fff;line-height:1;-webkit-transition:all 2s ease;transition:all 2s ease;visibility:visible;opacity:1;}
+.loadingmask.invisible{visibility:hidden;opacity:0;}
+.loadingmask.invisible .loading span{-ms-animation:none;-webkit-animation:none;-moz-animation:none;animation:none;}
+.loading{left:50%;top:50%;width:19rem;height:19rem;-webkit-transform:translate3d(-50%,-50%,0) rotate(45deg);transform:translate3d(-50%,-50%,0) rotate(45deg);}
+.loading div{position:absolute;left:35%;top:35%;width:30%;height:30%;background:#000;z-index:0;border-radius:.5rem;-webkit-transform:scale(2);transform:scale(2);
+	-ms-animation: pulse 1.5s ease infinite;
+	-webkit-animation: pulse 1.5s ease infinite;
+	-moz-animation: pulse 1.5s ease infinite;
+	animation: pulse 1.5s ease infinite;}
+.loadingmask .loadstatetext{position:absolute;left:50%;top:50%;z-index:1;-webkit-transform:translate3d(-50%,-50%,0);transform:translate3d(-50%,-50%,0);}
+.loading span{position:absolute;display:block;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:.5rem;background:#000;}
+.loading span:before{display:block;padding:.5rem;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
+.loading span:nth-child(1){left:0;top:0;-webkit-transform:translate3d(0, 0, 0);transform:translate3d(0, 0, 0);}
+.loading span:nth-child(2){left:100%;top:0;-webkit-transform:translate3d(-100%, 0, 0);transform:translate3d(-100%, 0, 0);}
+.loading span:nth-child(3){left:100%;top:100%;-webkit-transform:translate3d(-100%, -100%, 0);transform:translate3d(-100%, -100%, 0);}
+.loading span:nth-child(4){left:0;top:100%;-webkit-transform:translate3d(0, -100%, 0);transform:translate3d(0, -100%, 0);}
+.loading span:nth-child(1):before{content:'正';}
+.loading span:nth-child(2):before{content:'在';}
+.loading span:nth-child(3):before{content:'加';}
+.loading span:nth-child(4):before{content:'载';}
+.loading span:nth-child(1){
+	-ms-animation: square-br 3s ease infinite;
+	-webkit-animation: square-br 3s ease infinite;
+	-moz-animation: square-br 3s ease infinite;
+	animation: square-br 3s ease infinite;
+	-ms-animation-delay:0;
+	-webkit-animation-delay:0;
+	-moz-animation-delay:0;
+	animation-delay:0;}
+.loading span:nth-child(2){
+	-ms-animation: square-lb 3s ease infinite;
+	-webkit-animation: square-lb 3s ease infinite;
+	-moz-animation: square-lb 3s ease infinite;
+	animation: square-lb 3s ease infinite;}
+.loading span:nth-child(3){
+	-ms-animation: square-tl 3s ease infinite;
+	-webkit-animation: square-tl 3s ease infinite;
+	-moz-animation: square-tl 3s ease infinite;
+	animation: square-tl 3s ease infinite;}
+.loading span:nth-child(4){
+	-ms-animation: square-rt 3s ease infinite;
+	-webkit-animation: square-rt 3s ease infinite;
+	-moz-animation: square-rt 3s ease infinite;
+	animation: square-rt 3s ease infinite;}
+.loading span:nth-child(2),.loading span:nth-child(3),.loading span:nth-child(4){
+	-ms-animation-delay:.2s;
+	-webkit-animation-delay:.2s;
+	-moz-animation-delay:.2s;
+	animation-delay:.2s;
+	
+}
+@-webkit-keyframes pulse{
+	0%{
+		-webkit-transform: scale(2);
+		transform: scale(2);
+	}
+	75% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+@keyframes pulse{
+	0%{
+		-webkit-transform: scale(2);
+		transform: scale(2);
+	}
+	75% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+@-webkit-keyframes square-br{
+	0% {
+		-webkit-transform:translate(0, 0);
+		left:0;top:0;
+	}
+	25% {
+		-webkit-transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+	50% {
+		-webkit-transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+	75% {
+		-webkit-transform:translate(-100%, 0);
+		left:100%;top:0;
+	}
+}
+@keyframes square-br{
+	0% {
+		transform:translate(0, 0);
+		left:0;top:0;
+	}
+	25% {
+		transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+	50% {
+		transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+	75% {
+		transform:translate(-100%, -100%);
+		left:100%;top:0;
+	}
+}
+@-webkit-keyframes square-lb{
+	0% {
+		-webkit-transform:translate(-100%, 0);
+		left:100%;top:0;
+	}
+	25% {
+		-webkit-transform:translate(0, 0);
+		left:0;top:0;
+	}
+	50% {
+		-webkit-transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+	75% {
+		-webkit-transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+}
+@keyframes square-lb{
+	0% {
+		transform:translate(-100%, 0);
+		left:100%;top:0;
+	}
+	25% {
+		transform:translate(0, 0);
+		left:0;top:0;
+	}
+	50% {
+		transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+	75% {
+		transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+}
+@-webkit-keyframes square-tl{
+	0% {
+		-webkit-transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+	25% {
+		-webkit-transform:translate(-100%, 0);
+		left:100%;top:0;
+	}
+	50% {
+		-webkit-transform:translate(0, 0);
+		left:0;top:0;
+	}
+	75% {
+		-webkit-transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+}
+@keyframes square-tl{
+	0% {
+		transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+	25% {
+		transform:translate(-100%, 0);
+		left:100%;top:0;
+	}
+	50% {
+		transform:translate(0, 0);
+		left:0;top:0;
+	}
+	75% {
+		transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+}
+@-webkit-keyframes square-rt{
+	0% {
+		-webkit-transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+	25% {
+		-webkit-transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+	50% {
+		-webkit-transform:translate(-100%, 0);
+		left:100%;top:0;
+		
+	}
+	75% {
+		-webkit-transform:translate(0, 0);
+		left:0;top:0;
+	}
+}
+@keyframes square-rt{
+	0% {
+		transform:translate(0, -100%);
+		left:0;top:100%;
+	}
+	25% {
+		transform:translate(-100%, -100%);
+		left:100%;top:100%;
+	}
+	50% {
+		transform:translate(-100%, 0);
+		left:100%;top:0;
+		
+	}
+	75% {
+		transform:translate(0, 0);
+		left:0;top:0;
+	}
+}
+</style>
+<style data-uri="css/m.css"></style>
+<script id="J_preloadjs" data-uri="js/preloadjs.js"></script>
+<script data-uri="js/jquery.js"></script>
+<script data-uri="js/doT.js"></script>
+<!--<script id="child_tpl" data-uri="tpl/child_tpl.html" type="text/template"></script>
+<script id="list_xx" data-uri="tpl/list_xx.html" type="text/template"></script>-->
+</head>
+<body>
+	<header class="clear header">
+		<dl class="headerright fr">
+			<dt><span class="iconlabel">更多</span><i class="rotate180 icon-arrowleft"></i></dt>
+			<dd class="nobr">
+				<a href="#">下拉菜单1</a>
+				<a href="#">下拉菜单2</a>
+			</dd>
+		</dl>
+		<div class="headerleft fl"><a class="btn" href="#"><i class="icon-arrowleft"></i><span class="iconlabel">返回</span></a></div>
+		<h1 class="ell">标题超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长超长</h1>
+	</header>
+	<section>
+		<article>
+			<h3>纯css3星星评分</h3>
+			<div class="wrapper">
+				<style>
+				.wrapper {
+					padding: 2rem;
+					margin: 2rem;
+					border-radius: .5rem;
+					box-shadow: 0 0 1rem rgba(0,0,0,.1);
+					background-color: #eee;
+				}
+
+				.rating {
+					overflow: hidden;
+					vertical-align: bottom;
+					display: inline-block;
+					width: auto;
+					height: 3rem;
+				}
+				
+				.rating > input {
+					opacity: 0;
+					margin-right: -100%;
+				}
+				
+				.rating > label {
+					position: relative;
+					display: block;
+					float: right;
+					background:#f00 /*url('star-off-big.png')*/;
+					background-size: 3rem 3rem;
+				}
+				
+				.rating > label:before {
+					display: block;
+					opacity: 0;
+					content: '';
+					width: 3rem;
+					height: 3rem;
+					background:#07f /*url('star-on-big.png')*/;
+					background-size: 3rem 3rem;
+					transition: opacity 0.2s linear;
+				}
+				.rating > label:hover:before,
+				.rating > label:hover ~ label:before,
+				.rating:not(:hover) > :checked ~ label:before { opacity: 1; }
+				</style>
+				<span class="rating">
+					<input id="rating5" type="radio" name="rating" value="5">
+					<label for="rating5">5</label>
+					<input id="rating4" type="radio" name="rating" value="4">
+					<label for="rating4">4</label>
+					<input id="rating3" type="radio" name="rating" value="3">
+					<label for="rating3">3</label>
+					<input id="rating2" type="radio" name="rating" value="2" checked>
+					<label for="rating2">2</label>
+					<input id="rating1" type="radio" name="rating" value="1">
+					<label for="rating1">1</label>
+				</span>
+			</div>
+		</article>
+	</section>
+	<div class="textcolumns3" style="background:#ff0">内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列内容自动分为三列</div>
+	<footer class="footer">
+		<a class="active" href="#"><i class="icon-china"><em>99+</em></i><p>nav1</p></a>
+		<a href="#"><i class="icon-abnormal"><em>99+</em></i><p>nav2</p></a>
+		<a href="#"><i class="icon-project"><em>99+</em></i><p>导航3</p></a>
+		<a href="#"><i class="icon-compare"><em>99+</em></i><p>导航four</p></a>
+		<a href="#"><i class="icon-chart"><em>99+</em></i><p>nav5</p></a>
+		<a href="#"><i class="icon-chart"><em>99+</em></i><p>nav5</p></a>
+	</footer>
+
+
+<div id="J_loadingmask" class="loadingmask">
+	<div class="loading">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<div></div>
+	</div>
+	<div class="loadstatetext" id="J_loadgprogress">0%</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<style>
+.dialogwrap, .dialog, .diafooter{display:-webkit-box;display:-ms-flexbox;display:-moz-box;display:box;display:-webkit-flex;display:flex;}
+.dialogwrap{-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;position:absolute;left:0;top:0;z-index:10000;width:100%;height:100%;overflow:hidden;font-size:1.4rem;color:#333;}
+.dialogwrap.blackbg{background:rgba(0,0,0,.3);}
+.dialogwrap *{-webkit-box-sizing:border-box;box-sizing:border-box;}
+.dialog{-moz-flex-direction:column;-webkit-flex-direction:column;flex-direction:column;max-width:80%;max-height:100%;background:#fff;border-radius:1rem;overflow:hidden;}
+@media screen and (min-width:640px){.dialog{max-width:60%;}}
+@media screen and (min-width:960px){.dialog{max-width:50%;}}
+@media screen and (min-width:1280px){.dialog{max-width:40%;}}
+@media screen and (min-width:1440px){.dialog{max-width:30%;}}
+@media screen and (min-width:1960px){.dialog{max-width:20%;}}
+@media screen and (min-width:2080px){.dialog{max-width:10%;}}
+.diatitlewrap, .diafooter{position:relative;width:100%;height:4rem;line-height:4rem;}
+.diatitlewrap{border-bottom:.1rem solid #ddd;}
+.diatitle{padding:0 4rem 0 .5rem;font-size:1.6rem;font-weight:normal;}
+.closeicon{position:absolute;right:0;top:0;width:4rem;height:4rem;background:transparent;cursor:pointer;}
+.closeicon:before, .closeicon:after{position:absolute;left:1rem;top:2rem;content:'';width:2rem;height:.2rem;background-color:rgba(0,0,0,.3);transform:rotate(45deg);-webkit-transform:rotate(45deg);}
+.closeicon:after{-webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
+.diacontwrap{min-width:20rem;padding:1rem;}
+.diacont{word-break:break-all;word-wrap:break-word;line-height:1.3;}
+.diafooter{border-top:.1rem solid #ddd;}
+.diafooter button[role]{display:block;flex:1;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;overflow:hidden;border:0;line-height:inherit;text-align:center;font-size:1.4rem;text-align:center;background:#fff;cursor:pointer;}
+.diafooter button[role]+button[role]{border-left:.1rem solid #ddd;}
+</style>
+<div class="dialogwrap blackbg">
+	<div class="dialog" role="dialog">
+		<div class="diatitlewrap"><h6 class="diatitle" role="title">标题</h6><span class="closeicon" role="close"></span></div>
+		<div class="diacontwrap">
+			<div class="diacont" role="content">啊实打实大</div>
+		</div>
+		<div class="diafooter"><button role="no" onclick="alert(0)">取消</button><button role="yes" onclick="confirm(1)">好</button></div>
+	</div>
+</div>
+
+<style type="text/css">
+.toast{}
+</style>
+<!--<div class="toast">底部弹出选项按钮组</div>-->
+
+
+
+
+<script type="text/javascript">
+window.onerror = function(e){
+	console.log(e);
+	//alert('系统貌似发生错误！请联系管理员！');
+	var lstorage = window['localStorage'];
+	if(lstorage) lstorage.clear();
+	//location.reload(1);
+};
+
+/*页面初始化*/
+function scriptInitiate(){
+	console.log('资源加载完毕可以使用了！');
+	var tpl = $('#list_xx').text(),
+		childtpldata = {'title':'这是子模板数据'},
+		childtplresult = {
+			childtpl: doT.template($('#child_tpl').text())(childtpldata)
+		},
+		datas = [{
+			name: '张三',
+			age: 24,
+			sex: '男',
+			homeurl: 'http://www.baidu.com?a=1&b=<'
+		}, {
+			name: '李四',
+			age: 30,
+			sex: '女',
+			homeurl: 'http://www.youku.com?a=1&b=2'
+		}, null],
+		html = doT.template(tpl, 0, childtplresult)(datas);
+	console.log(html);
+	$('#content').html(html);
+	//TODO 添加移动端手指操作事件
+}
+
+/*加载效果显示*/
+var J_loadgprogress = document.querySelector('#J_loadgprogress'),
+	loadingClass = document.querySelector('#J_loadingmask').classList;
+loadingClass.remove('invisible');
+function updateLoadingState(percentage){
+	J_loadgprogress.innerHTML = parseInt(percentage*100) + '%';
+	if(percentage == 1){
+		loadingClass.add('invisible');
+	}
+}
+//测试
+/*setTimeout(function(){
+	loadingClass.remove('invisible');
+}, 3000);*/
+
+/*资源加载并缓存*/
+(function(version, urlAttr, scriptInitiate, updateLoadingState, preloadSelector){
+	urlAttr = urlAttr || 'data-uri';
+	var versionSuffix = '?srcver='+version,
+		srcs = [], lstorage = window['localStorage'],
+		sources = document.querySelectorAll('script[' +urlAttr+ '], style[' +urlAttr+ ']'),
+		sourcesLen = sources.length, srcLoadQ = Array(sourcesLen), sourceLoaded = 0,
+		J_preloadjs = document.querySelector(preloadSelector || '#J_preloadjs'),
+		preloadjsSrc = J_preloadjs.getAttribute(urlAttr) + versionSuffix;
+	//地址获取并判断是否支持localStorage，不支持则直接设置src,href
+	lstorage = false;//测试localstorage
+	for(var i=0, il=sources.length; i<il; i++){
+		var el = sources[i], src = el.getAttribute(urlAttr);
+		//srcs.push(src);
+		srcs.push({
+			ele: el,
+			src: src,
+			loadTimeout: 60000,
+			type:'text'
+		});
+		if(!lstorage){
+			if(el.tagName == 'SCRIPT'){
+				el.onload = function(){
+					singleFileLoad(this);
+				};
+				el.src = src + versionSuffix;
+			}else if(el.tagName == 'STYLE'){
+				var link = document.createElement('link');
+				link.rel = 'stylesheet';
+				document.getElementsByTagName('head')[0].appendChild(link);
+				link.onload = function(){
+					singleFileLoad(this);
+				};
+				link.href = src + versionSuffix;
+				//el.innerHTML = '@import url('+ src +')';
+			}
+		}
+	}
+	
+	var queue, needUpdate = false;
+	if(lstorage){
+		//版本检查
+		if(lstorage.getItem('version') != version){
+			needUpdate = true;
+			lstorage.clear();
+			lstorage.setItem('version', version);
+			for(var j=0; j<il; j++){
+				srcs[j]['src'] = srcs[j]['src'] + versionSuffix;
+			}
+		}
+		//存在localStorage
+		if(lstorage.getItem(preloadjsSrc) != null){
+			for(i=0; i<il; i++){
+				var scriptSource = lstorage.getItem(srcs[i]['src']+ versionSuffix), sourceItem = sources[i];
+				try{
+					scriptSource = JSON.parse(scriptSource);
+				}catch(e){ };
+				if(scriptSource != null){
+					//存在缓存则直接应用js或css
+					insertCodes(sourceItem, scriptSource);
+				}else{
+					console.log('系统所需资源不完整，页面需刷新以重新加载资源！');
+					lstorage.clear();
+					/*setTimeout(function(){
+						location.reload(1);
+					}, 50);*/
+				}
+			}
+			
+			if(needUpdate){
+				cjsLoadFiles(srcs);
+			}
+			updateLoadingState(1);
+			scriptInitiate();
+		}else{
+			J_preloadjs.onload = function(){
+				cjsLoadFiles(srcs, 1);
+				J_preloadjs.onload = null;
+			};
+			J_preloadjs.src = preloadjsSrc;
+		}
+	}
+	
+	//直接通过src设置加载单个资源
+	function singleFileLoad(el){
+		srcLoadQ.pop();
+		sourceLoaded = (sourcesLen - srcLoadQ.length) / sourcesLen;
+		updateLoadingState(sourceLoaded);
+		if(!srcLoadQ.length){
+			scriptInitiate();
+		}
+		el.onload = null;
+	}
+	
+	//页面插入代码
+	function insertCodes(elem, scriptSource){
+		if(elem.tagName == 'SCRIPT'){
+			elem.text = scriptSource;
+		}else if(elem.tagName == 'STYLE'){
+			if('styleSheet' in elem){
+				elem.styleSheet.cssText = scriptSource;
+			}else{
+				elem.innerHTML = scriptSource;
+			}
+		}
+	}
+	
+	//使用preloadjs加载资源
+	function cjsLoadFiles(srcs, needeval){
+		if(window.createjs){
+			queue = new createjs.LoadQueue();
+			queue.on("fileload", function(e){
+				handleFileLoad(e, needeval);
+			});
+			queue.on("progress", handleOverallProgress);
+			queue.on("fileprogress", handleFileProgress);
+			queue.on("error", handleFileError);
+			
+			queue.on("complete", handleComplete);
+			queue.loadManifest(srcs);
+		}else{
+			onerror();
+		}
+	}
+	
+	/*资源加载等相关事件*/
+	function handleFileLoad(e, needeval){
+		var item = e.item, elem = item['ele'], scriptSource = e.result;
+		lstorage.setItem(item.src, JSON.stringify(scriptSource));
+		if(needeval && '#'+elem.id != preloadSelector){
+			insertCodes(elem, scriptSource);
+		}
+	}
+	function handleOverallProgress(e){
+		updateLoadingState(queue.progress);
+	}
+	function handleFileProgress(e){
+		updateLoadingState(queue.progress);
+	}
+	function handleFileError(e){
+		console.log(e);
+		onerror();
+	}
+	function handleComplete(e){
+		updateLoadingState(1);
+		scriptInitiate();
+	}
+})(20150820, 'data-uri', scriptInitiate, updateLoadingState, '#J_preloadjs');
+//version, urlAttr, scriptInitiate, updateLoadingState, preloadSelector
+</script>
+</body>
+</html>

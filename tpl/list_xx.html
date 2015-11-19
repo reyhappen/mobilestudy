@@ -1,0 +1,23 @@
+<dl>
+	{{~ it:value:index}}
+	<dt>{{=value && value.name||'此人姓名不详！'}}</dt>
+	<dd>
+		{{? value }}
+		<ul>
+			{{ for(var key in value){ }}
+			<li><!--注释测试索引{{=key}}-->{{ console.log(index);}}{{=key}}：{{=value[key]}}</li>
+			{{ } }}
+		</ul>
+		{{?? }}
+		此人信息不全！
+		{{?}}
+	</dd>
+	{{~}}
+</dl>
+<div style="background:#f00;">
+{{##def.snippet1:
+{{#def.childtpl}}
+#}}
+<!--childtpl指代-->
+{{#def.snippet1}}
+</div>
